@@ -1,41 +1,49 @@
 <?php include("./connect.php");
 
-if(isset($_POST["regname1"])){
-    $first_name = $_POST["regname1"];
-    $last_name = $_POST["regname2"];
-    $phone = $_POST["regphone"];
-    $email = $_POST["regemail"];
-    $college = $_POST["regcollege"];
-    $category = $_POST["regcategory"];
-    $field= $_POST["regfield"];
-    $tenthmarks = $_POST["regtenthmarks"];
-    $diplomamarks = $_POST["regdiplomamarks"];
-    $degreemarks = $_POST["regdegreemarks"];
-    $yearofpassing = $_POST["regyearofpassing"];
-    
-    $query = "insert into companies (first_name, last_name, phone, email, college, category, field, tenth_marks, twelfth_marks, degree_marks, year_of_passing) values ('$first_name', '$last_name', $phone, '$email', '$college', '$category', '$field', '$tenthmarks', '$diplomamarks', '$degreemarks', '$yearofpassing')";
-    $res = mysqli_query($conn, $query);
-    if ($res) {
-      $data = [
-        "success" => 1,
-        "message" => "Registration was successful."
-      ];
-      $jsonData = json_encode($data);
-      $encodedData = urlencode($jsonData); // Encode the data to be URL-safe
-      $redirectUrl = "index.php?data=" . $encodedData;
-      header("Location: " . $redirectUrl);
-      exit();
-    } else {
-      $data = [
-        "success" => 0,
-        "message" => "Please try again later."
-      ];
-      $jsonData = json_encode($data);
-      $encodedData = urlencode($jsonData);
-      $redirectUrl = "index.php?data=" . $encodedData;
-      header("Location: " . $redirectUrl);
-      exit();
+if (isset($_POST["regcompanyname"])) {
+  $company_name = $_POST["regcompanyname"];
+  $hr_name = $_POST["reghrname"];
+  $phone = $_POST["regphone"];
+  $email = $_POST["regemail"];
+  $location = $_POST["reglocation"];
+  $position_count = $_POST["regopencount"];
+  $average_ctc = $_POST["regaveragectc"];
+  $maximum_ctc = $_POST["regmaxctc"];
+  $description = $_POST["regdescription"];
+  $selection = $_POST["regselection"];
+  if (isset($_POST["regfields"])){
+    $selectedfields=$_POST["regfields"];
+    $interest_string="";
+    foreach ($selectedfields as $fields){
+      $interest_string=$interest_string.$fields.",";
     }
+    $query = "insert into companies (company_name, hr_name, phone, email, job_location, position_count, average_ctc, maximum_ctc, job_brief, selection_brief, categories) values ('$company_name', '$hr_name', $phone, '$email', '$location', '$position_count', '$average_ctc', '$maximum_ctc', '$description', '$selection', '$interest_string')";
+  }else{
+    $query = "insert into companies (company_name, hr_name, phone, email, job_location, position_count, average_ctc, maximum_ctc, job_brief, selection_brief) values ('$company_name', '$hr_name', $phone, '$email', '$location', '$position_count', '$average_ctc', '$maximum_ctc', '$description', '$selection')";
+  }
+
+  $res = mysqli_query($conn, $query);
+  if ($res) {
+    $data = [
+      "success" => 1,
+      "message" => "Registration was successful."
+    ];
+    $jsonData = json_encode($data);
+    $encodedData = urlencode($jsonData); // Encode the data to be URL-safe
+    $redirectUrl = "index.php?data=" . $encodedData;
+    header("Location: " . $redirectUrl);
+    exit();
+  } else {
+    $data = [
+      "success" => 0,
+      "message" => "Please try again later."
+    ];
+    $jsonData = json_encode($data);
+    $encodedData = urlencode($jsonData);
+    $redirectUrl = "index.php?data=" . $encodedData;
+    header("Location: " . $redirectUrl);
+    exit();
+  }
 }
 
 ?>
@@ -94,7 +102,7 @@ if(isset($_POST["regname1"])){
           <li><a class="nav-link scrollto active hover-underline-animation" href="#videohero">Home</a></li>
           <li><a class="nav-link scrollto hover-underline-animation" href="#about">About</a></li>
           <li><a class="nav-link scrollto hover-underline-animation" href="#contact">Contact</a></li>
-          <li class="dropdown"><a id="myherobutton"href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a id="myherobutton" href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
             <ul style="border-radius: 10px;">
               <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform">Student</a></li>
               <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform">Company</a></li>
@@ -114,84 +122,153 @@ if(isset($_POST["regname1"])){
   <main>
     <section id="register" class="register">
       <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Register Here</h2>
-          </div>
-          <div class="eligibilitycontentcontainer registercontainerreducer">
-            <form action="company-register.php" method="POST" enctype="multipart/form-data">
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regcompanyname">Comapny's Name</label>
-                  <input type="text" name="regcompanyname" class="form-control" id="regcompanyname" placeholder="" required>
+        <div class="section-title">
+          <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Register Here</h2>
+        </div>
+        <div class="eligibilitycontentcontainer registercontainerreducer">
+          <form action="company-register.php" method="POST" enctype="multipart/form-data">
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regcompanyname">Comapny's Name</label>
+                <input type="text" name="regcompanyname" class="form-control" id="regcompanyname" placeholder="" required>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="reghrname">Attending HR's Name</label>
+                <input type="text" class="form-control" name="reghrname" id="reghrname" placeholder="" required>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regphone">Phone</label>
+                <input type="number" class="form-control" name="regphone" id="regphone" placeholder="" required>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regemail">Email</label>
+                <input type="email" class="form-control" name="regemail" id="regemail" placeholder="" required>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="reglocation">Job location</label>
+                <input type="text" class="form-control" name="reglocation" id="reglocation" placeholder="" required>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regopencount">Number of open positions</label>
+                <input type="number" class="form-control" name="regopencount" id="regopencount" placeholder="" required>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regaveragectc">Approximate average CTC</label>
+                <input type="number" class="form-control" name="regaveragectc" id="regaveragectc" placeholder="" required>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regmaxctc">Approximate maximum CTC</label>
+                <input type="number" class="form-control" name="regmaxctc" id="regmaxctc" placeholder="" required>
+              </div>
+            </div>
+            
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regdescription">A brief about the job </label>
+                <textarea rows="6" class="form-control" name="regdescription" id="regdescription" placeholder="" required></textarea>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regselection">A brief about the selection process </label>
+                <textarea rows="6" class="form-control" name="regselection" id="regselection" placeholder="e.g. Aptitude, Training, HR etc." required></textarea>
+              </div>
+            </div>
+            <label class="form-check-label" style="margin-bottom: 15px;" data-aos="fade-up" data-aos-delay="100">Open positions for</label>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group d-flex" style="gap:0 2rem;margin-bottom:15px;flex-wrap:wrap;">
+              <label class="form-check-label" style="font-weight: 600;">Engineering:</label>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Computer Science" id="computerscience">
+                  <label class="form-check-label" style="margin-bottom: 0;" for="computerscience">
+                    Computer Science
+                  </label>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="reghrname">Attending HR's Name</label>
-                  <input type="text" class="form-control" name="reghrname" id="reghrname" placeholder="" required>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Information Technology" id="informationtechnology" >
+                  <label class="form-check-label" style="margin-bottom: 0;" for="informationtechnology">
+                    Information Technology
+                  </label>
+                </div>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Electronics and Telecommunications" id="electronicsandtelecommunications" >
+                  <label class="form-check-label" style="margin-bottom: 0;" for="electronicsandtelecommunications">
+                  Electronics and Telecommunications
+                  </label>
+                </div>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Electrical" id="electrical" >
+                  <label class="form-check-label" style="margin-bottom: 0;" for="electrical">
+                  Electrical
+                  </label>
+                </div>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Mechanical" id="mechanical" >
+                  <label class="form-check-label" style="margin-bottom: 0;" for="mechanical">
+                  Mechanical
+                  </label>
+                </div>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Civil" id="civil" >
+                  <label class="form-check-label" for="civil">
+                  Civil
+                  </label>
                 </div>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regphone">Phone</label>
-                  <input type="number" class="form-control" name="regphone" id="regphone" placeholder="" required>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group d-flex" style="gap:0 2rem;margin-bottom:15px;flex-wrap:wrap;">
+              <label class="form-check-label" style="font-weight: 600;">Non-Engineering:</label>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Diploma" id="diploma">
+                  <label class="form-check-label" for="diploma">
+                    Diploma
+                  </label>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regemail">Email</label>
-                  <input type="email" class="form-control" name="regemail" id="regemail" placeholder="" required>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Commerce" id="commerce" >
+                  <label class="form-check-label" for="commerce">
+                  Commerce
+                  </label>
                 </div>
-              </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-12 form-group">
-                  <label for="regcollege">College Name</label>
-                  <input type="text" class="form-control" name="regcollege" id="regcollege" placeholder="" required>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Pharma" id="pharma" >
+                  <label class="form-check-label" for="pharma">
+                  Pharma
+                  </label>
                 </div>
-              </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regcategory">Category</label>
-                  <select class="form-select" name="regcategory" id="regcategory" placeholder="" onchange="handleCategoryChange()" required>
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Non-Engineering/Diploma">Non-Engineering/Diploma</option>
-                    <option value="HSC (12th passed)">HSC (12th passed)</option>
-                  </select>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="BSC Computer Science" id="bsccomputerscience" >
+                  <label class="form-check-label" for="bsccomputerscience">
+                  BSC Computer Science
+                  </label>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regfield">Field</label>
-                  <select class="form-select" name="regfield" id="regfield" placeholder="" required>
-                    <option value="" disabled selected>Select an option</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regtenthmarks">Class 10th Marks (in %)</label>
-                  <input type="number" class="form-control" name="regtenthmarks" id="regtenthmarks" placeholder="" required>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regdiplomamarks">Class 12th/Diploma marks (in %)</label>
-                  <input type="number" class="form-control" name="regdiplomamarks" id="regdiplomamarks" placeholder="" required>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="BSC Information Technology" id="bscinformationtechnology" >
+                  <label class="form-check-label" for="bscinformationtechnology">
+                  BSC Information Technology
+                  </label>
                 </div>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regdegreemarks">Degree Marks (in %)</label>
-                  <input type="number" class="form-control" name="regdegreemarks" id="regdegreemarks" placeholder="">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regyearofpassing">Year of Passing</label>
-                  <input type="number" class="form-control" name="regyearofpassing" id="regyearofpassing" required>
-                </div>
-              </div>
-
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label for="regfile">Upload your CV (in PDF)</label>
-                  <input type="file" class="form-control" name="regfile" id="regfile" accept=".pdf" placeholder="">
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group d-flex" style="gap:0 2rem;margin-bottom:15px;flex-wrap:wrap;">
+              <label class="form-check-label" style="font-weight: 600;">12th passed (HSC):</label>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    HSC passed
+                  </label>
                 </div>
               </div>
-              <button id="regsubmit" name="regsubmit" type="submit">Submit</button>
-            </form>
-          </div>
+            </div>
+            <button id="regsubmit" name="regsubmit" type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </section>
   </main>

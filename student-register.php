@@ -1,31 +1,37 @@
 <?php include("./connect.php");
 
-if(isset($_POST["regname1"])){
-    $first_name = $_POST["regname1"];
-    $last_name = $_POST["regname2"];
-    $phone = $_POST["regphone"];
-    $email = $_POST["regemail"];
-    $college = $_POST["regcollege"];
-    $category = $_POST["regcategory"];
-    $field= $_POST["regfield"];
-    $tenthmarks = $_POST["regtenthmarks"];
-    $diplomamarks = $_POST["regdiplomamarks"];
-    $degreemarks = $_POST["regdegreemarks"];
-    $yearofpassing = $_POST["regyearofpassing"];
+if (isset($_POST["regname1"])) {
+  $first_name = $_POST["regname1"];
+  $last_name = $_POST["regname2"];
+  $phone = $_POST["regphone"];
+  $email = $_POST["regemail"];
+  $college = $_POST["regcollege"];
+  $category = $_POST["regcategory"];
+  $field = $_POST["regfield"];
+  $tenthmarks = $_POST["regtenthmarks"];
+  $diplomamarks = $_POST["regdiplomamarks"];
+  $degreemarks = $_POST["regdegreemarks"];
+  $yearofpassing = $_POST["regyearofpassing"];
+
+  if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["regfile"])) {
+    $targetDirectory = "uploads/"; // Change this to your desired directory
+
+    // Get the original file name and extension
+    $originalFileName = $_FILES["regfile"]["name"];
+    $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
+    // Generate a custom file name (you can use any method to generate a unique name)
+    $customFileName = $phone . "." . $fileExtension;
+
+    $targetFile = $targetDirectory . $customFileName;
     
-    $query = "insert into students (first_name, last_name, phone, email, college, category, field, tenth_marks, twelfth_marks, degree_marks, year_of_passing) values ('$first_name', '$last_name', $phone, '$email', '$college', '$category', '$field', '$tenthmarks', '$diplomamarks', '$degreemarks', '$yearofpassing')";
-    $res = mysqli_query($conn, $query);
-    if ($res) {
-      $data = [
-        "success" => 1,
-        "message" => "Registration was successful."
-      ];
-      $jsonData = json_encode($data);
-      $encodedData = urlencode($jsonData); // Encode the data to be URL-safe
-      $redirectUrl = "index.php?data=" . $encodedData;
-      header("Location: " . $redirectUrl);
-      exit();
+    // Check if the file was successfully uploaded
+    if (move_uploaded_file($_FILES["regfile"]["tmp_name"], $targetFile)) {
+      echo "File uploaded successfully.";
+      $query = "insert into students (first_name, last_name, phone, email, college, category, field, tenth_marks, twelfth_marks, degree_marks, year_of_passing,path) values ('$first_name', '$last_name', $phone, '$email', '$college', '$category', '$field', '$tenthmarks', '$diplomamarks', '$degreemarks', '$yearofpassing','$targetFile')";
+      $res = mysqli_query($conn, $query);
     } else {
+      echo "Error uploading file.";
       $data = [
         "success" => 0,
         "message" => "Please try again later."
@@ -36,6 +42,30 @@ if(isset($_POST["regname1"])){
       header("Location: " . $redirectUrl);
       exit();
     }
+  }
+
+  
+  if ($res) {
+    $data = [
+      "success" => 1,
+      "message" => "Registration was successful."
+    ];
+    $jsonData = json_encode($data);
+    $encodedData = urlencode($jsonData); // Encode the data to be URL-safe
+    $redirectUrl = "index.php?data=" . $encodedData;
+    header("Location: " . $redirectUrl);
+    exit();
+  } else {
+    $data = [
+      "success" => 0,
+      "message" => "Please try again later."
+    ];
+    $jsonData = json_encode($data);
+    $encodedData = urlencode($jsonData);
+    $redirectUrl = "index.php?data=" . $encodedData;
+    header("Location: " . $redirectUrl);
+    exit();
+  }
 }
 
 ?>
@@ -94,7 +124,7 @@ if(isset($_POST["regname1"])){
           <li><a class="nav-link scrollto active hover-underline-animation" href="#videohero">Home</a></li>
           <li><a class="nav-link scrollto hover-underline-animation" href="#about">About</a></li>
           <li><a class="nav-link scrollto hover-underline-animation" href="#contact">Contact</a></li>
-          <li class="dropdown"><a id="myherobutton"href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a id="myherobutton" href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
             <ul style="border-radius: 10px;">
               <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform">Student</a></li>
               <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform">Company</a></li>
@@ -114,84 +144,84 @@ if(isset($_POST["regname1"])){
   <main>
     <section id="register" class="register">
       <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Register Here</h2>
-          </div>
-          <div class="eligibilitycontentcontainer registercontainerreducer">
-            <form action="student-register.php" method="POST" enctype="multipart/form-data">
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regname1">First Name</label>
-                  <input type="text" name="regname1" class="form-control" id="regname1" placeholder="" required>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regname2">Last Name</label>
-                  <input type="text" class="form-control" name="regname2" id="regname2" placeholder="" required>
-                </div>
+        <div class="section-title">
+          <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Register Here</h2>
+        </div>
+        <div class="eligibilitycontentcontainer registercontainerreducer">
+          <form action="student-register.php" method="POST" enctype="multipart/form-data">
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regname1">First Name</label>
+                <input type="text" name="regname1" class="form-control" id="regname1" placeholder="" required>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regphone">Phone</label>
-                  <input type="number" class="form-control" name="regphone" id="regphone" placeholder="" required>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regemail">Email</label>
-                  <input type="email" class="form-control" name="regemail" id="regemail" placeholder="" required>
-                </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regname2">Last Name</label>
+                <input type="text" class="form-control" name="regname2" id="regname2" placeholder="" required>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-12 form-group">
-                  <label for="regcollege">College Name</label>
-                  <input type="text" class="form-control" name="regcollege" id="regcollege" placeholder="" required>
-                </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regphone">Phone</label>
+                <input type="number" class="form-control" name="regphone" id="regphone" placeholder="" required>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regcategory">Category</label>
-                  <select class="form-select" name="regcategory" id="regcategory" placeholder="" onchange="handleCategoryChange()" required>
-                    <option value="" disabled selected>Select an option</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Non-Engineering/Diploma">Non-Engineering/Diploma</option>
-                    <option value="HSC (12th passed)">HSC (12th passed)</option>
-                  </select>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regfield">Field</label>
-                  <select class="form-select" name="regfield" id="regfield" placeholder="" required>
-                    <option value="" disabled selected>Select an option</option>
-                  </select>
-                </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regemail">Email</label>
+                <input type="email" class="form-control" name="regemail" id="regemail" placeholder="" required>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regtenthmarks">Class 10th Marks (in %)</label>
-                  <input type="number" class="form-control" name="regtenthmarks" id="regtenthmarks" placeholder="" required>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regdiplomamarks">Class 12th/Diploma marks (in %)</label>
-                  <input type="number" class="form-control" name="regdiplomamarks" id="regdiplomamarks" placeholder="" required>
-                </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-12 form-group">
+                <label for="regcollege">College Name</label>
+                <input type="text" class="form-control" name="regcollege" id="regcollege" placeholder="" required>
               </div>
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regdegreemarks">Degree Marks (in %)</label>
-                  <input type="number" class="form-control" name="regdegreemarks" id="regdegreemarks" placeholder="">
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                  <label for="regyearofpassing">Year of Passing</label>
-                  <input type="number" class="form-control" name="regyearofpassing" id="regyearofpassing" required>
-                </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regcategory">Category</label>
+                <select class="form-select" name="regcategory" id="regcategory" placeholder="" onchange="handleCategoryChange()" required>
+                  <option value="" disabled selected>Select an option</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Non-Engineering/Diploma">Non-Engineering/Diploma</option>
+                  <option value="HSC (12th passed)">HSC (12th passed)</option>
+                </select>
               </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regfield">Field</label>
+                <select class="form-select" name="regfield" id="regfield" placeholder="" required>
+                  <option value="" disabled selected>Select an option</option>
+                </select>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regtenthmarks">Class 10th Marks (in %)</label>
+                <input type="number" class="form-control" name="regtenthmarks" id="regtenthmarks" placeholder="" required>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regdiplomamarks">Class 12th/Diploma marks (in %)</label>
+                <input type="number" class="form-control" name="regdiplomamarks" id="regdiplomamarks" placeholder="" required>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regdegreemarks">Degree Marks (in %)</label>
+                <input type="number" class="form-control" name="regdegreemarks" id="regdegreemarks" placeholder="">
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regyearofpassing">Year of Passing</label>
+                <input type="number" class="form-control" name="regyearofpassing" id="regyearofpassing" required>
+              </div>
+            </div>
 
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                  <label for="regfile">Upload your CV (in PDF)</label>
-                  <input type="file" class="form-control" name="regfile" id="regfile" accept=".pdf" placeholder="">
-                </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label for="regfile">Upload your CV (in PDF)</label>
+                <input type="file" class="form-control" name="regfile" id="regfile" accept=".pdf" placeholder="">
               </div>
-              <button id="regsubmit" name="regsubmit" type="submit">Submit</button>
-            </form>
-          </div>
+            </div>
+            <button id="regsubmit" name="regsubmit" type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </section>
   </main>

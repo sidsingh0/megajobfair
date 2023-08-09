@@ -475,10 +475,9 @@
 
           <div class="col-xl-5 content">
             <h3 style="margin-bottom: 8px;">About</h3>
-            <p style="font-family: 'Poppins';margin-bottom: 5px;">Siddharth Ovalekar Foundation (SOF) is organising Job Fair 2023 in collaboration with New Horizon Scholar's School (NHSS).
-              More than 50 companies will be part of the drive, and recruiting students from a wide range of fields.
+            <p style="font-family: 'Poppins';margin-bottom: 5px;">The Siddharth Ovalekar Foundation (SOF) is organizing Job Fair 2023 in collaboration with New Horizon Scholar's School (NHSS). Over 50 companies will be participating in the event, recruiting students from a diverse range of fields.
             </p>
-            <p style="font-family: 'Poppins';margin-bottom: 30px;">Register today for exciting opportunities!</p>
+            <p style="font-family: 'Poppins';margin-bottom: 30px;">Register today to seize exciting opportunities!</p>
             <div class="d-flex myherobuttons myherobuttons2 mt-0" style="align-items: center;">
               <!-- <p class="m-0">Are you:</p> -->
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform" class="myherocontactbutton d-flex" style="align-items: center;background-color: #e03a3c;"><span>Students</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
