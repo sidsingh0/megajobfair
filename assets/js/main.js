@@ -328,10 +328,11 @@ function showNonengineering(element){
   // Set new content after a brief delay
   setTimeout(function() {
     eligibilityList.innerHTML = `
+    <li>Diploma</li>
     <li>Commerce</li>
     <li>Pharma</li>
     <li>BSC Computer Science</li>
-    <li>BSC Information Technology Engineering</li>
+    <li>BSC Information Technology</li>
     `;
 
     // Trigger fade-in animation
@@ -356,19 +357,37 @@ function showHsc(element){
     eligibilityList.style.opacity = "1";
   }, 300); // Adjust the delay time (in milliseconds) as needed
 }
-function showPolytechnic(){
-  var eligibilityList = document.getElementById("eligibilitylist");
-  eligibilityList.style.opacity = "0"; // Set initial opacity to 0
 
-  // Set new content after a brief delay
-  setTimeout(function() {
-    eligibilityList.innerHTML = `
-        `;
-
-    // Trigger fade-in animation
-    eligibilityList.style.transition = "opacity 1s";
-    eligibilityList.style.opacity = "1";
-  }, 300); // Adjust the delay time (in milliseconds) as needed
+function handleCategoryChange() {
+  const selectElement = document.getElementById('regcategory');
+  const selectedValue = selectElement.value;
+  const fieldElement = document.getElementById('regfield')
+  if (selectedValue=="Engineering"){
+    fieldElement.innerHTML=`
+    <option value="" disabled selected>Select an option</option>
+    <option value="Computer Science Engineering">Computer Science Engineering</option>
+    <option value="Information Technology Engineering">Information Technology Engineering</option>
+    <option value="Electronics and Telecommunications Engineering">Electronics and Telecommunications Engineering</option>
+    <option value="Electrical Engineering">Electrical Engineering</option>
+    <option value="Mechanical Engineering">Mechanical Engineering</option>
+    <option value="Civil Engineering">Civil Engineering</option>
+    `
+  }
+  if (selectedValue=="Non-Engineering/Diploma"){
+    fieldElement.innerHTML=`
+    <option value="" disabled selected>Select an option</option>
+    <option value="Diploma">Diploma</option>
+    <option value="Commerce">Commerce</option>
+    <option value="Pharma">Pharma</option>
+    <option value="BSC Computer Science">BSC Computer Science</option>
+    <option value="BSC Information Technology">BSC Information Technology</option>
+    `
+  }
+  if (selectedValue=="HSC (12th passed)"){
+    fieldElement.innerHTML=`
+    <option value="HSC (12th passed)" selected>HSC (12th passed)</option>
+    `
+  }
 }
 
 window.onscroll = function () {

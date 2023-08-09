@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +70,7 @@
     </div>
   </div>
   <!-- ======= Hero Section ======= -->
-
+  
   <section id="videohero">
     <video autoplay muted loop id="myVideo">
       <source src="assets/img/vidbg8.mp4" type="video/mp4">
@@ -126,7 +127,53 @@
       }
     }
     </script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
 
+<?php
+
+  if (isset($_GET["data"])) {
+    $encodedJsonData = $_GET["data"];
+    $jsonData = urldecode($encodedJsonData);
+    $decodedData = json_decode($jsonData, true);
+    if ($decodedData["success"]) {
+      echo '
+      <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="35" height="35" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        <div>
+          <strong>Congratulations!</strong>
+          <p style="margin:0px;font-size:14px;">Your registration was successful.</p>
+        </div>
+        <button type="button" style="position:unset!important;margin: 0 0 0 40px;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      ';
+    }else{
+      echo '
+      <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="35" height="35" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+          <strong>Something went wrong!</strong>
+          <p style="margin:0px;font-size:14px;">Please try again later.</p>
+        </div>
+        <button type="button" style="position:unset!important;margin: 0 0 0 40px;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      ';
+    }
+  }
+
+?>
+
+
+    
   <!-- <section id="hero" class="d-flex myherobg" style="position: relative;">
 
     <div class="container d-flex" style="justify-content: center;" data-aos="zoom-out" data-aos-delay="100">
@@ -427,10 +474,11 @@
         <div class="row align-items-xl-center gy-5">
 
           <div class="col-xl-5 content">
-            <h3>About</h3>
-            <p style="font-family: 'Poppins';">Siddharth Ovalekar Foundation (SOF) is organising Job Fair 2023 in collaboration with New Horizon Scholar's School (NHSS).
+            <h3 style="margin-bottom: 8px;">About</h3>
+            <p style="font-family: 'Poppins';margin-bottom: 5px;">Siddharth Ovalekar Foundation (SOF) is organising Job Fair 2023 in collaboration with New Horizon Scholar's School (NHSS).
               More than 50 companies will be part of the drive, and recruiting students from a wide range of fields.
             </p>
+            <p style="font-family: 'Poppins';margin-bottom: 30px;">Register today for exciting opportunities!</p>
             <div class="d-flex myherobuttons myherobuttons2 mt-0" style="align-items: center;">
               <!-- <p class="m-0">Are you:</p> -->
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform" class="myherocontactbutton d-flex" style="align-items: center;background-color: #e03a3c;"><span>Students</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
@@ -445,7 +493,7 @@
                 <div class="icon-box">
                   <i class="bx bx-calendar-event" style="margin-bottom: 15px;"></i>
                   <h3 style="margin-bottom:5px">Date</h3>
-                  <p style="font-family: 'Poppins';">The event will be held on 11:00 a.m. on 26th of August 2023.</p>
+                  <p style="font-family: 'Poppins';">The event will be held on 11:00 a.m. on 26th of August 2023</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -461,7 +509,7 @@
                 <div class="icon-box">
                   <i class="bx bx-timer" style="margin-bottom: 15px;"></i>
                   <h3 style="margin-bottom:5px">Deadline</h3>
-                  <p style="font-family: 'Poppins';">The registration will close on 12th of July at 12:00 p.m. afternoon.</p>
+                  <p style="font-family: 'Poppins';">The registration will close on 12th of July at 12:00 p.m. afternoon</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -469,7 +517,7 @@
                 <div class="icon-box">
                   <i class="bx bx-book" style="margin-bottom: 15px;"></i>
                   <h3 style="margin-bottom:5px">Eligibility</h3>
-                  <p style="font-family: 'Poppins';">Anyone above class 12 can apply including Engineers and Non-engineers.</p>
+                  <p style="font-family: 'Poppins';">Anyone above class 12 can apply including Engineers and Non-engineers</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -544,25 +592,21 @@
       <div class="container">
         <h2 class="section-title meratitle p-3" style="font-size: 40px;font-weight:bold;text-transform: none;color: #1a2533;">Open positions for</h2>
         <div class="row align-items-center mt-4">
-          <div class="col-lg-4 eligibilitynav">
-            <div class="eligibilitynav-card" onclick="showEngineering(this)">
+          <div class="col-lg-4 col-md-6 eligibilitynav">
+            <div class="eligibilitynav-card" id="eligibilityengineering" onclick="showEngineering(this)">
               <i style="font-size: 35px;" class="eligibilitylogos bi bi-cpu"></i>
-              <p>Engineering</p>
+              <p style="color: #1a2533;">Engineering</p>
             </div>
-            <div class="eligibilitynav-card"  onclick="showNonengineering()">
+            <div class="eligibilitynav-card" id="eligibilitynonengineering"  onclick="showNonengineering(this)">
               <i style="font-size: 35px;" class="eligibilitylogos bi bi-mortarboard"></i>
-              <p>Non-Engineering</p>
+              <p style="color: #1a2533;">Non-Engineering</p>
             </div>
-            <div class="eligibilitynav-card"  onclick="showPolytechnic()">
-              <i style="font-size: 35px;" class="eligibilitylogos bi bi-plus-circle"></i>
-              <p>HSC</p>
-            </div>
-            <div class="eligibilitynav-card"  onclick="showHsc()">
+            <div class="eligibilitynav-card"  id="eligibilityhsc" onclick="showHsc(this)">
               <i style="font-size: 35px;" class="eligibilitylogos bi bi-book"></i>
-              <p>HSC & Diploma</p>
+              <p style="color: #1a2533;">HSC</p>
             </div>            
           </div>
-          <div class="col-lg-8 eligibilitycontent">
+          <div class="col-lg-8 col-md-6 eligibilitycontent">
             <div class="eligibilitycontentcontainer">
               <ul class="eligibilitylist eligibilitylist1" id="eligibilitylist">
                 <li>Computer Science Engineering</li>
@@ -750,6 +794,7 @@
           window.open(`mailto:ovalekarsiddharth@gmail.com?subject=Inquiry Mega Job Fair&body=${query} (Name: ${name}, Phone: ${phone}, Email: ${email})`);
         }
     })
+    showEngineering(document.getElementById("eligibilityengineering"))
   </script>
 
 </body>

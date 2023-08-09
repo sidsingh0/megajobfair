@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: "hind", sans-serif;
+  font-family: 'Poppins';
   background-color: #f4f4f4;
   color: #444444;
 }
@@ -2506,6 +2506,46 @@ section {
 .myiconbox1 h4 a{
   color: #1a2533!important;
 }
+
+.register{
+  margin-top: 60px;
+}
+.form-group{
+  margin-bottom: 20px;
+}
+.form-control{
+  padding: 10px 15px;
+}
+.form-select{
+  padding: 10px 15px;
+}
+#regsubmit{
+    background: #e03a3c;
+    border: 0;
+    padding: 10px 32px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+label{
+  display: inline-block;
+    color: #8c8c8c;
+    font-size: 14px;
+    /* font-weight: 500; */
+    margin-bottom: 3px;
+}
+.alert{
+  /* width: 80%; */
+  position: fixed;
+  top:20%;
+  left:50%;
+  translate:-50%;
+  z-index: 10000;
+}
+.alert-dismissible{
+  padding-right: 16px;
+}
 @media screen and (max-width:991px) {
   .gmaps{
     margin: 24px 0px 0px;
@@ -2752,5 +2792,21 @@ aside.gallery {
   .resultdiv1{
     flex-direction: column;
     gap:8px;
+  }
+}
+@media screen and (max-width:768px) {
+  .eligibilitynav{
+    padding: 0px;
+  }
+  .eligibilitycontent{
+    padding: 0;
+  }
+  #eligibilityhsc{
+    margin-bottom: 30px;
+  }
+}
+@media screen and (max-width:450px) {
+  .registercontainerreducer{
+    padding: 15px!important;
   }
 }
