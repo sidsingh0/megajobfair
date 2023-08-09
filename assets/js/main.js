@@ -297,6 +297,73 @@ function progressBarScroll() {
   document.getElementById("progressBar").style.width = scrolled + "%";
 }
 
+function showEngineering(){
+  var eligibilityList = document.getElementById("eligibilitylist");
+  eligibilityList.style.opacity = "0"; // Set initial opacity to 0
+
+  // Set new content after a brief delay
+  setTimeout(function() {
+    eligibilityList.innerHTML = `
+        <li>Computer Science Engineering</li>
+        <li>Information Technology Engineering</li>
+        <li>Electronics and Telecommunications Engineering</li>
+        <li>Electrical Engineering</li>
+        <li>Mechanical Engineering</li>
+        <li>Civil Engineering</li>
+    `;
+
+    // Trigger fade-in animation
+    eligibilityList.style.transition = "opacity 1s";
+    eligibilityList.style.opacity = "1";
+  }, 300); // Adjust the delay time (in milliseconds) as needed
+}
+function showNonengineering(){
+  var eligibilityList = document.getElementById("eligibilitylist");
+  eligibilityList.style.opacity = "0"; // Set initial opacity to 0
+
+  // Set new content after a brief delay
+  setTimeout(function() {
+    eligibilityList.innerHTML = `
+    <li>Commerce</li>
+    `;
+
+    // Trigger fade-in animation
+    eligibilityList.style.transition = "opacity 1s";
+    eligibilityList.style.opacity = "1";
+  }, 300); // Adjust the delay time (in milliseconds) as needed
+}
+function showHsc(){
+  var eligibilityList = document.getElementById("eligibilitylist");
+  eligibilityList.style.opacity = "0"; // Set initial opacity to 0
+
+  // Set new content after a brief delay
+  setTimeout(function() {
+    eligibilityList.innerHTML = `
+    <li>Class 12th passouts (HSC)</li>
+   <li>Diploma</li>
+    `;
+
+    // Trigger fade-in animation
+    eligibilityList.style.transition = "opacity 1s";
+    eligibilityList.style.opacity = "1";
+  }, 300); // Adjust the delay time (in milliseconds) as needed
+}
+function showPolytechnic(){
+  var eligibilityList = document.getElementById("eligibilitylist");
+  eligibilityList.style.opacity = "0"; // Set initial opacity to 0
+
+  // Set new content after a brief delay
+  setTimeout(function() {
+    eligibilityList.innerHTML = `
+    <li>BSC Computer Science</li>
+    <li>BSC Information Technology Engineering</li>    `;
+
+    // Trigger fade-in animation
+    eligibilityList.style.transition = "opacity 1s";
+    eligibilityList.style.opacity = "1";
+  }, 300); // Adjust the delay time (in milliseconds) as needed
+}
+
 window.onscroll = function () {
   progressBarScroll();
 };
