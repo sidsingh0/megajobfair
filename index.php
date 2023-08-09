@@ -162,7 +162,7 @@
         <svg class="bi flex-shrink-0 me-2" width="35" height="35" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
         <div>
           <strong>Something went wrong!</strong>
-          <p style="margin:0px;font-size:14px;">Please try again later.</p>
+          <p style="margin:0px;font-size:14px;">'.$decodedData["message"].'</p>
         </div>
         <button type="button" style="position:unset!important;margin: 0 0 0 40px;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>

@@ -13,6 +13,21 @@ if (isset($_POST["regname1"])) {
   $degreemarks = $_POST["regdegreemarks"];
   $yearofpassing = $_POST["regyearofpassing"];
 
+  $phonequery="select * from students where phone = '$phone'";
+  $phonequery_res=mysqli_query($conn,$phonequery);
+  if(mysqli_num_rows($phonequery_res)>0){
+    echo "Error uploading file.";
+    $data = [
+      "success" => 0,
+      "message" => "Phone number is already registered."
+    ];
+    $jsonData = json_encode($data);
+    $encodedData = urlencode($jsonData);
+    $redirectUrl = "index.php?data=" . $encodedData;
+    header("Location: " . $redirectUrl);
+    exit();
+  }
+
   if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES["regfile"])) {
     $targetDirectory = "uploads/"; // Change this to your desired directory
 
