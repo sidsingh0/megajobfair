@@ -151,7 +151,7 @@
         <svg class="bi flex-shrink-0 me-2" width="35" height="35" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
         <div>
           <strong>Congratulations!</strong>
-          <p style="margin:0px;font-size:14px;">Your registration was successful.</p>
+          <p style="margin:0px;font-size:14px;">'.$decodedData["message"].'</p>
         </div>
         <button type="button" style="position:unset!important;margin: 0 0 0 40px;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>

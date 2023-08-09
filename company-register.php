@@ -11,6 +11,7 @@ if (isset($_POST["regcompanyname"])) {
   $maximum_ctc = $_POST["regmaxctc"];
   $description = $_POST["regdescription"];
   $selection = $_POST["regselection"];
+  
   if (isset($_POST["regfields"])){
     $selectedfields=$_POST["regfields"];
     $interest_string="";
