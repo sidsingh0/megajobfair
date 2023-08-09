@@ -79,7 +79,7 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #f4f4f4;
+  background: #fff;
   transition: all 0.5s;
   z-index: 997;
   padding: 25px 0 15px 0;
@@ -89,7 +89,7 @@ h6 {
 #header.header-scrolled {
   padding: 22px 0 12px;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  background: #f6f6f6;
+  background: #fff;
 
 }
 
@@ -2200,6 +2200,7 @@ section {
   font-family: 'Poppins',sans-serif;
   font-weight: 700;
 }
+
 .eligibilitynav-card{
   width: 100%;
   cursor: pointer;
@@ -2217,7 +2218,7 @@ section {
 .eligibilitycontentcontainer{
   transition: 0.3s;
   padding: 30px;
-  min-height: 320px;
+  min-height: 240px;
   border-radius: 10px;
   background: #f7f7f7!important;
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.05);
@@ -2228,8 +2229,17 @@ section {
   color: #e03a3c;
   transition: 0.3s;
 }
+.highlighteligibility{
+  background: #eb4245!important;
+  transition: 0.3s;
+}
+.highlighteligibility .eligibilitylogos{
+  color: #f4f4f4!important;
+  transition: 0.3s;
+}
 .eligibilitynav-card:hover{
-  background-color: #e03a3c;
+  background-color: #f3a3a4;
+  color: #f4f4f4;
 }
 .eligibilitynav-card:hover .eligibilitylogos{
   color: #f4f4f4!important;

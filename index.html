@@ -427,10 +427,11 @@
         <div class="row align-items-xl-center gy-5">
 
           <div class="col-xl-5 content">
-            <h3>About</h3>
-            <p style="font-family: 'Poppins';">Siddharth Ovalekar Foundation (SOF) is organising Job Fair 2023 in collaboration with New Horizon Scholar's School (NHSS).
+            <h3 style="margin-bottom: 8px;">About</h3>
+            <p style="font-family: 'Poppins';margin-bottom: 5px;">Siddharth Ovalekar Foundation (SOF) is organising Job Fair 2023 in collaboration with New Horizon Scholar's School (NHSS).
               More than 50 companies will be part of the drive, and recruiting students from a wide range of fields.
             </p>
+            <p style="font-family: 'Poppins';margin-bottom: 30px;">Register today for exciting opportunities!</p>
             <div class="d-flex myherobuttons myherobuttons2 mt-0" style="align-items: center;">
               <!-- <p class="m-0">Are you:</p> -->
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform" class="myherocontactbutton d-flex" style="align-items: center;background-color: #e03a3c;"><span>Students</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
@@ -545,21 +546,17 @@
         <h2 class="section-title meratitle p-3" style="font-size: 40px;font-weight:bold;text-transform: none;color: #1a2533;">Open positions for</h2>
         <div class="row align-items-center mt-4">
           <div class="col-lg-4 eligibilitynav">
-            <div class="eligibilitynav-card" onclick="showEngineering()">
+            <div class="eligibilitynav-card" id="eligibilityengineering" onclick="showEngineering(this)">
               <i style="font-size: 35px;" class="eligibilitylogos bi bi-cpu"></i>
               <p>Engineering</p>
             </div>
-            <div class="eligibilitynav-card"  onclick="showNonengineering()">
+            <div class="eligibilitynav-card" id="eligibilitynonengineering"  onclick="showNonengineering(this)">
               <i style="font-size: 35px;" class="eligibilitylogos bi bi-mortarboard"></i>
               <p>Non-Engineering</p>
             </div>
-            <div class="eligibilitynav-card"  onclick="showPolytechnic()">
-              <i style="font-size: 35px;" class="eligibilitylogos bi bi-plus-circle"></i>
-              <p>Polytechnic</p>
-            </div>
-            <div class="eligibilitynav-card"  onclick="showHsc()">
+            <div class="eligibilitynav-card"  id="eligibilityhsc" onclick="showHsc(this)">
               <i style="font-size: 35px;" class="eligibilitylogos bi bi-book"></i>
-              <p>HSC & Diploma</p>
+              <p>HSC</p>
             </div>            
           </div>
           <div class="col-lg-8 eligibilitycontent">

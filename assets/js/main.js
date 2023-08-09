@@ -297,10 +297,12 @@ function progressBarScroll() {
   document.getElementById("progressBar").style.width = scrolled + "%";
 }
 
-function showEngineering(){
+function showEngineering(element){
   var eligibilityList = document.getElementById("eligibilitylist");
   eligibilityList.style.opacity = "0"; // Set initial opacity to 0
-
+  element.classList.add('highlighteligibility')
+  document.getElementById('eligibilityhsc').classList.remove('highlighteligibility')
+  document.getElementById('eligibilitynonengineering').classList.remove('highlighteligibility')
   // Set new content after a brief delay
   setTimeout(function() {
     eligibilityList.innerHTML = `
@@ -317,14 +319,19 @@ function showEngineering(){
     eligibilityList.style.opacity = "1";
   }, 300); // Adjust the delay time (in milliseconds) as needed
 }
-function showNonengineering(){
+function showNonengineering(element){
   var eligibilityList = document.getElementById("eligibilitylist");
   eligibilityList.style.opacity = "0"; // Set initial opacity to 0
-
+  element.classList.add('highlighteligibility')
+  document.getElementById('eligibilityengineering').classList.remove('highlighteligibility')
+  document.getElementById('eligibilityhsc').classList.remove('highlighteligibility')
   // Set new content after a brief delay
   setTimeout(function() {
     eligibilityList.innerHTML = `
     <li>Commerce</li>
+    <li>Pharma</li>
+    <li>BSC Computer Science</li>
+    <li>BSC Information Technology Engineering</li>
     `;
 
     // Trigger fade-in animation
@@ -332,15 +339,16 @@ function showNonengineering(){
     eligibilityList.style.opacity = "1";
   }, 300); // Adjust the delay time (in milliseconds) as needed
 }
-function showHsc(){
+function showHsc(element){
   var eligibilityList = document.getElementById("eligibilitylist");
   eligibilityList.style.opacity = "0"; // Set initial opacity to 0
-
+  element.classList.add('highlighteligibility')
+  document.getElementById('eligibilityengineering').classList.remove('highlighteligibility')
+  document.getElementById('eligibilitynonengineering').classList.remove('highlighteligibility')
   // Set new content after a brief delay
   setTimeout(function() {
     eligibilityList.innerHTML = `
     <li>Class 12th passouts (HSC)</li>
-   <li>Diploma</li>
     `;
 
     // Trigger fade-in animation
@@ -355,8 +363,7 @@ function showPolytechnic(){
   // Set new content after a brief delay
   setTimeout(function() {
     eligibilityList.innerHTML = `
-    <li>BSC Computer Science</li>
-    <li>BSC Information Technology Engineering</li>    `;
+        `;
 
     // Trigger fade-in animation
     eligibilityList.style.transition = "opacity 1s";
