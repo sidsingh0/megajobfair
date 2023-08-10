@@ -55,8 +55,8 @@
           <li><a class="nav-link scrollto hover-underline-animation" href="#contact">Contact</a></li>
           <li class="dropdown"><a id="myherobutton"href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
             <ul style="border-radius: 10px;">
-              <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform">Student</a></li>
-              <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform">Company</a></li>
+              <li><a style="margin:0px" href="/student-register">Student</a></li>
+              <li><a style="margin:0px" href="/company-register">Company</a></li>
             </ul>
           </li>
         </ul>
@@ -91,8 +91,8 @@
       <p id="myherosubheader" style="color: #9e9e9e;">26th August 2023</p>
       <!-- <p class="heropresents" style="margin:0px;font-family: 'poppins';font-size: 15px;font-weight: 400;color:#848484;letter-spacing: 0.5px;">Register:</p> -->
       <div class="d-flex myherobuttons mt-2">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform" class="myheroregisterbutton d-flex" style="align-items: center;"><span>Student</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform" class="myherocontactbutton d-flex" style="align-items: center;"><span>Company</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
+        <a href="/student-register" class="myheroregisterbutton d-flex" style="align-items: center;"><span>Student</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
+        <a href="/company-register" class="myherocontactbutton d-flex" style="align-items: center;"><span>Company</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
       </div>
     </div>
   </section>
@@ -480,8 +480,8 @@
             <p style="font-family: 'Poppins';margin-bottom: 30px;">Register today to seize exciting opportunities!</p>
             <div class="d-flex myherobuttons myherobuttons2 mt-0" style="align-items: center;">
               <!-- <p class="m-0">Are you:</p> -->
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform" class="myherocontactbutton d-flex" style="align-items: center;background-color: #e03a3c;"><span>Students</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform" class="myherocontactbutton d-flex" style="align-items: center;"><span>Company</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
+              <a href="/student-register" class="myherocontactbutton d-flex" style="align-items: center;background-color: #e03a3c;"><span>Students</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
+              <a href="/company-register" class="myherocontactbutton d-flex" style="align-items: center;"><span>Company</span> <i class="bx bx-chevron-right" style="font-size: 20px;"></i></a>
             </div>
           </div>
 
