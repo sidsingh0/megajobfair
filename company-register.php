@@ -1,5 +1,16 @@
 <?php include("./connect.php");
 
+function randomPassword() {
+  $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  $pass = array(); //remember to declare $pass as an array
+  $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+  for ($i = 0; $i < 8; $i++) {
+      $n = rand(0, $alphaLength);
+      $pass[] = $alphabet[$n];
+  }
+  return implode($pass); //turn the array into a string
+}
+
 if (isset($_POST["regcompanyname"])) {
   $company_name = $_POST["regcompanyname"];
   $hr_name = $_POST["reghrname"];
@@ -11,6 +22,7 @@ if (isset($_POST["regcompanyname"])) {
   $maximum_ctc = $_POST["regmaxctc"];
   $description = $_POST["regdescription"];
   $selection = $_POST["regselection"];
+  $password = randomPassword();
   
   if (isset($_POST["regfields"])){
     $selectedfields=$_POST["regfields"];
@@ -18,9 +30,9 @@ if (isset($_POST["regcompanyname"])) {
     foreach ($selectedfields as $fields){
       $interest_string=$interest_string.$fields.",";
     }
-    $query = "insert into companies (company_name, hr_name, phone, email, job_location, position_count, average_ctc, maximum_ctc, job_brief, selection_brief, categories) values ('$company_name', '$hr_name', $phone, '$email', '$location', '$position_count', '$average_ctc', '$maximum_ctc', '$description', '$selection', '$interest_string')";
+    $query = "insert into companies (company_name, hr_name, phone, email, job_location, position_count, average_ctc, maximum_ctc, job_brief, selection_brief, categories, password) values ('$company_name', '$hr_name', $phone, '$email', '$location', '$position_count', '$average_ctc', '$maximum_ctc', '$description', '$selection', '$interest_string', '$password')";
   }else{
-    $query = "insert into companies (company_name, hr_name, phone, email, job_location, position_count, average_ctc, maximum_ctc, job_brief, selection_brief) values ('$company_name', '$hr_name', $phone, '$email', '$location', '$position_count', '$average_ctc', '$maximum_ctc', '$description', '$selection')";
+    $query = "insert into companies (company_name, hr_name, phone, email, job_location, position_count, average_ctc, maximum_ctc, job_brief, selection_brief, password) values ('$company_name', '$hr_name', $phone, '$email', '$location', '$position_count', '$average_ctc', '$maximum_ctc', '$description', '$selection', '$password')";
   }
 
   $res = mysqli_query($conn, $query);
@@ -56,17 +68,19 @@ if (isset($_POST["regcompanyname"])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Mega Job Fair 2023 | ISHRAE x APSIT</title>
+  <title>SOF Job Fair 2023</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=poppins@900,500,400,300,800,700,600&f[]=hind@400,500&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=switzer@600,800,900,700,400,300,500&f[]=satoshi@900,800,600,700,500,300,400&display=swap" rel="stylesheet" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
@@ -78,80 +92,50 @@ if (isset($_POST["regcompanyname"])) {
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style.css?random=1923832139" rel="stylesheet" />
+  <style>
+      ::placeholder {
+        color:#8c8c8c;
+      }
+    </style>
 </head>
 
 <body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-      <div class="mylogo me-auto">
-        <img src="assets/img/sof.jpeg" style="border-left: none;padding-left: 0;" class="apsitlogo" alt="" srcset="">
-        <img src="assets/img/nhss.jpeg" class="apsitlogo" alt="" srcset="">
-        <!-- <img src="assets/img/logos/job4u.png" id="apsitlogo" alt="" srcset=""> -->
-      </div>
-
-
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
-
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active hover-underline-animation" href="#videohero">Home</a></li>
-          <li><a class="nav-link scrollto hover-underline-animation" href="#about">About</a></li>
-          <li><a class="nav-link scrollto hover-underline-animation" href="#contact">Contact</a></li>
-          <li class="dropdown"><a id="myherobutton" href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
-            <ul style="border-radius: 10px;">
-              <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform">Student</a></li>
-              <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform">Company</a></li>
-            </ul>
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
-  <div class="progress-header">
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-  </div>
-
+    <?php include("./navbar.php"); ?>
   <main>
     <section id="register" class="register">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Register Here</h2>
+          <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Company Registration</h2>
         </div>
         <div class="eligibilitycontentcontainer registercontainerreducer">
           <form action="company-register.php" method="POST" enctype="multipart/form-data">
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regcompanyname">Comapny's Name</label>
-                <input type="text" name="regcompanyname" class="form-control" id="regcompanyname" placeholder="" required>
+                <input type="text" maxlength="100" name="regcompanyname" class="form-control" id="regcompanyname" placeholder="" required>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="reghrname">Attending HR's Name</label>
-                <input type="text" class="form-control" name="reghrname" id="reghrname" placeholder="" required>
+                <input type="text" maxlength="100" class="form-control" name="reghrname" id="reghrname" placeholder="" required>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regphone">Phone</label>
-                <input type="number" class="form-control" name="regphone" id="regphone" placeholder="" required>
+                <input type="number" maxlength="10" class="form-control" name="regphone" id="regphone" placeholder="" required>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regemail">Email</label>
-                <input type="email" class="form-control" name="regemail" id="regemail" placeholder="" required>
+                <input type="email" maxlength="100" class="form-control" name="regemail" id="regemail" placeholder="" required>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="reglocation">Job location</label>
-                <input type="text" class="form-control" name="reglocation" id="reglocation" placeholder="" required>
+                <input type="text" maxlength="200" class="form-control" name="reglocation" id="reglocation" placeholder="" required>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regopencount">Number of open positions</label>
@@ -160,23 +144,23 @@ if (isset($_POST["regcompanyname"])) {
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                <label for="regaveragectc">Approximate average CTC</label>
-                <input type="number" class="form-control" name="regaveragectc" id="regaveragectc" placeholder="" required>
+                <label for="regaveragectc">Approximate average CTC (Annual)</label>
+                <input type="number" class="form-control" name="regaveragectc" id="regaveragectc" placeholder="300000" required>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                <label for="regmaxctc">Approximate maximum CTC</label>
-                <input type="number" class="form-control" name="regmaxctc" id="regmaxctc" placeholder="" required>
+                <label for="regmaxctc">Approximate maximum CTC (Annual)</label>
+                <input type="number" class="form-control" name="regmaxctc" id="regmaxctc" placeholder="600000" required>
               </div>
             </div>
             
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regdescription">A brief about the job </label>
-                <textarea rows="6" class="form-control" name="regdescription" id="regdescription" placeholder="" required></textarea>
+                <textarea rows="6" maxlength="400" class="form-control" name="regdescription" id="regdescription" placeholder="" required></textarea>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regselection">A brief about the selection process </label>
-                <textarea rows="6" class="form-control" name="regselection" id="regselection" placeholder="e.g. Aptitude, Training, HR etc." required></textarea>
+                <textarea rows="6" maxlength="400" class="form-control" name="regselection" id="regselection" placeholder="e.g. Aptitude, Training, HR etc." required></textarea>
               </div>
             </div>
             <label class="form-check-label" style="margin-bottom: 15px;" data-aos="fade-up" data-aos-delay="100">Open positions for</label>
@@ -219,6 +203,12 @@ if (isset($_POST["regcompanyname"])) {
                   Civil
                   </label>
                 </div>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="Chemical" id="chemical" >
+                  <label class="form-check-label" for="chemical">
+                  Chemical
+                  </label>
+                </div>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -254,15 +244,21 @@ if (isset($_POST["regcompanyname"])) {
                   BSC Information Technology
                   </label>
                 </div>
+                <div class="form-check" style="margin-bottom: 0;">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="LLB" id="llb" >
+                  <label class="form-check-label" for="bscinformationtechnology">
+                    LLB
+                  </label>
+                </div>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group d-flex" style="gap:0 2rem;margin-bottom:15px;flex-wrap:wrap;">
-              <label class="form-check-label" style="font-weight: 600;">12th passed (HSC):</label>
+              <label class="form-check-label" style="font-weight: 600;">12th class (HSC):</label>
                 <div class="form-check" style="margin-bottom: 0;">
-                  <input class="form-check-input" type="checkbox" name="regfields[]" value="" id="flexCheckDefault">
+                  <input class="form-check-input" type="checkbox" name="regfields[]" value="12th HSC" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    HSC passed
+                    HSC (passed/pursuing)
                   </label>
                 </div>
               </div>
@@ -274,23 +270,42 @@ if (isset($_POST["regcompanyname"])) {
     </section>
   </main>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    <div class="container d-md-flex py-4" style="align-items: center;">
-
-      <div class="me-md-auto text-center text-md-start" style="letter-spacing: 0.2px;">
-        <div class="copyright">
-          <strong>SOF</strong> | All Rights Reserved.
+  <footer class="newfooter">
+    <div class="sectional" style="padding-top:32px;">
+      <div class="footersitemap row mb-4">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          <a href="/index.php" class="newnavbar_logos">
+            <img src="./assets/img/sofnegative.png" style="padding-right: 10px" alt="" srcset="" />
+          </a>
+          <p class="mt-4" style="color:#787878">Siddharth Ovalekar Foundation is a transformative initiative dedicated to assisting individuals across a diverse spectrum of domains.</p>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 newfooterpartners">
+          <p style="display:block;color:#f6f6f6;font-weight:600;font-size:18px; ">Associate Partners</p>
+          <a class="mt-1" href="https://www.facebook.com/Dr.ShrikantShindeFoundation/" style="display:block;color:#787878;font-size:14px;">Dr. Shrikant Shinde Foundation</a>
+          <a class="mt-1" href="https://siddharthovalekarfoundation.com"style="display:block;color:#787878;font-size:14px;">Siddharth Ovalekar Foundation</a>
+          <a class="mt-1" href="https://ishraethane.co.in/" style="display:block;color:#787878;font-size:14px;">ISHRAE Thane Chapter</a>
+          <a class="mt-1" href="https://www.instagram.com/job4u_info/?hl=en" style="display:block;color:#787878;font-size:14px;">JOB4U</a>
+          <a class="mt-1" href="https://nhitm.ac.in/" style="display:block;color:#787878;font-size:14px;">New Horizon Institute of Technology & Management</a>
+          <a class="mt-1" href="https://www.linkedin.com/company/jvsh-technologies/" style="display:block;color:#787878;font-size:14px;">JVSH Technologies</a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 newfooteroverview">
+          <p style="display:block;color:#f6f6f6;font-weight:600;font-size:18px;">Overview</p>
+          <a class="mt-1" href="/index.php" style="display:block;color:#787878;font-size:14px;">Home</a>
+          <a class="mt-1" href="/index.php#companiespart"style="display:block;color:#787878;font-size:14px;">Companies</a>
+          <a class="mt-1" href="/student-register.php" style="display:block;color:#787878;font-size:14px;">Student Registration</a>
+          <a class="mt-1" href="/company-register.php" style="display:block;color:#787878;font-size:14px;">Company Registration</a>
+          <a class="mt-1" href="#" style="display:block;color:#787878;font-size:14px;">View your status</a>
         </div>
       </div>
-      <div class="social-links text-center text-md-end pt-3 pt-md-0">
-        <a href="https://www.facebook.com/profile.php?id=100081828978440&mibextid=ZbWKwL" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="https://instagram.com/ishrae_thane_chapter?igshid=MzRlODBiNWFlZA==" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/ishrae-thane-chapter/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      <div class="newfootersocials">
+        <p class="newfootersocialsheader">Siddharth Ovalekar Foundation | All rights reserved</p>
+        <div class="newfootersocialslogos">
+          <i onclick="window.location.href = 'https://www.facebook.com/SiddharthDilipOvalekar?mibextid=ZbWKwL';" class='bx bxl-facebook' style="cursor: pointer;margin-right: 0px!important;"></i>
+          <i onclick="window.location.href = 'https://www.siddharthovalekarfoundation.com/';" class='bx bx-globe' style="cursor: pointer;margin-left: 5px!important;"></i>
+        </div>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -304,7 +319,7 @@ if (isset($_POST["regcompanyname"])) {
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?random=313123"></script>
 
 
 </html>

@@ -12,6 +12,7 @@ if (isset($_POST["regname1"])) {
   $diplomamarks = $_POST["regdiplomamarks"];
   $degreemarks = $_POST["regdegreemarks"];
   $yearofpassing = $_POST["regyearofpassing"];
+  $dob=$_POST["regdate"];
 
   $phonequery="select * from students where phone = '$phone'";
   $phonequery_res=mysqli_query($conn,$phonequery);
@@ -43,7 +44,7 @@ if (isset($_POST["regname1"])) {
     // Check if the file was successfully uploaded
     if (move_uploaded_file($_FILES["regfile"]["tmp_name"], $targetFile)) {
       echo "File uploaded successfully.";
-      $query = "insert into students (first_name, last_name, phone, email, college, category, field, tenth_marks, twelfth_marks, degree_marks, year_of_passing,path) values ('$first_name', '$last_name', $phone, '$email', '$college', '$category', '$field', '$tenthmarks', '$diplomamarks', '$degreemarks', '$yearofpassing','$targetFile')";
+      $query = "insert into students (first_name, last_name, phone, email, college, category, field, tenth_marks, twelfth_marks, degree_marks, year_of_passing,path,dob) values ('$first_name', '$last_name', $phone, '$email', '$college', '$category', '$field', '$tenthmarks', '$diplomamarks', '$degreemarks', '$yearofpassing','$targetFile','$dob')";
       $res = mysqli_query($conn, $query);
     } else {
       echo "Error uploading file.";
@@ -92,20 +93,20 @@ if (isset($_POST["regname1"])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Mega Job Fair 2023 | ISHRAE x APSIT</title>
+  <title>SOF Job Fair 2023</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=poppins@900,500,400,300,800,700,600&f[]=hind@400,500&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+  
+    <link href="https://api.fontshare.com/v2/css?f[]=switzer@600,800,900,700,400,300,500&f[]=satoshi@900,800,600,700,500,300,400&display=swap" rel="stylesheet" />
+
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -116,78 +117,48 @@ if (isset($_POST["regname1"])) {
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/style.css?random=1923832139" rel="stylesheet">
 </head>
 
 <body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-      <div class="mylogo me-auto">
-        <img src="assets/img/sof.jpeg" style="border-left: none;padding-left: 0;" class="apsitlogo" alt="" srcset="">
-        <img src="assets/img/nhss.jpeg" class="apsitlogo" alt="" srcset="">
-        <!-- <img src="assets/img/logos/job4u.png" id="apsitlogo" alt="" srcset=""> -->
-      </div>
-
-
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
-
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active hover-underline-animation" href="#videohero">Home</a></li>
-          <li><a class="nav-link scrollto hover-underline-animation" href="#about">About</a></li>
-          <li><a class="nav-link scrollto hover-underline-animation" href="#contact">Contact</a></li>
-          <li class="dropdown"><a id="myherobutton" href="#"><span>Apply Now</span> <i class="bi bi-chevron-down"></i></a>
-            <ul style="border-radius: 10px;">
-              <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSdoxUfXaCRw0v9QRcDM1br-f5D96sI7iGo1L_7o--5B2-TnQg/viewform">Student</a></li>
-              <li><a style="margin:0px" href="https://docs.google.com/forms/d/e/1FAIpQLSd9S8EbjQK8vFpvd_X2nn5hCi3O4hlevcXMwdSbcPm-Gdk0Iw/viewform">Company</a></li>
-            </ul>
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
-  <div class="progress-header">
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-  </div>
+    <?php include("./navbar.php"); ?>
 
   <main>
     <section id="register" class="register">
       <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Register Here</h2>
+          <h2 style="text-transform: none;color:#1a2533;font-size: 40px;">Student Registration</h2>
+          <p>Students should fill all the fields and upload files in .pdf/.doc formats only.</p>
+          <p>In case of technical errors, please reach out to <a style="text-decoration:underline;color:#444444" href="tel:+919372642011">9372642011</a> / <a style="text-decoration:underline;color:#444444" href="tel:+919967775891">9967775891</a> .</p>
         </div>
         <div class="eligibilitycontentcontainer registercontainerreducer">
           <form action="student-register.php" method="POST" enctype="multipart/form-data">
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regname1">First Name</label>
-                <input type="text" name="regname1" class="form-control" id="regname1" placeholder="" required>
+                <input type="text" maxlength="40" name="regname1" class="form-control" id="regname1" placeholder="" required>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regname2">Last Name</label>
-                <input type="text" class="form-control" name="regname2" id="regname2" placeholder="" required>
+                <input type="text" maxlength="40" class="form-control" name="regname2" id="regname2" placeholder="" required>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regphone">Phone</label>
-                <input type="number" class="form-control" name="regphone" id="regphone" placeholder="" required>
+                <input type="number" maxlength="10" class="form-control" name="regphone" id="regphone" placeholder="" required>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regemail">Email</label>
-                <input type="email" class="form-control" name="regemail" id="regemail" placeholder="" required>
+                <input type="email" maxlength="100" class="form-control" name="regemail" id="regemail" placeholder="" required>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
               <div class="col-lg-12 form-group">
                 <label for="regcollege">College Name</label>
-                <input type="text" class="form-control" name="regcollege" id="regcollege" placeholder="" required>
+                <input type="text" maxlength="150" class="form-control" name="regcollege" id="regcollege" placeholder="" required>
               </div>
             </div>
             <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -197,7 +168,7 @@ if (isset($_POST["regname1"])) {
                   <option value="" disabled selected>Select an option</option>
                   <option value="Engineering">Engineering</option>
                   <option value="Non-Engineering/Diploma">Non-Engineering/Diploma</option>
-                  <option value="HSC (12th passed)">HSC (12th passed)</option>
+                  <option value="12th HSC">HSC (12th passed/pursuing)</option>
                 </select>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
@@ -229,11 +200,16 @@ if (isset($_POST["regname1"])) {
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
                 <label for="regfile">Upload your CV (in PDF)</label>
-                <input type="file" class="form-control" name="regfile" id="regfile" accept=".pdf" placeholder="">
+                <input type="file" class="form-control" name="regfile" id="regfile" accept=".pdf, .doc, .docx" placeholder="" required>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="regdate">Date of birth</label>
+                <input type="date" class="form-control" id="regdate" name="regdate" max="2023-12-31" required>
               </div>
             </div>
+            
             <button id="regsubmit" name="regsubmit" type="submit">Submit</button>
           </form>
         </div>
@@ -241,23 +217,42 @@ if (isset($_POST["regname1"])) {
     </section>
   </main>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    <div class="container d-md-flex py-4" style="align-items: center;">
-
-      <div class="me-md-auto text-center text-md-start" style="letter-spacing: 0.2px;">
-        <div class="copyright">
-          <strong>SOF</strong> | All Rights Reserved.
+  <footer class="newfooter">
+    <div class="sectional" style="padding-top:32px;">
+      <div class="footersitemap row mb-4">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          <a href="/index.php" class="newnavbar_logos">
+            <img src="./assets/img/sofnegative.png" style="padding-right: 10px" alt="" srcset="" />
+          </a>
+          <p class="mt-4" style="color:#787878">Siddharth Ovalekar Foundation is a transformative initiative dedicated to assisting individuals across a diverse spectrum of domains.</p>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 newfooterpartners">
+          <p style="display:block;color:#f6f6f6;font-weight:600;font-size:18px; ">Associate Partners</p>
+          <a class="mt-1" href="https://www.facebook.com/Dr.ShrikantShindeFoundation/" style="display:block;color:#787878;font-size:14px;">Dr. Shrikant Shinde Foundation</a>
+          <a class="mt-1" href="https://siddharthovalekarfoundation.com"style="display:block;color:#787878;font-size:14px;">Siddharth Ovalekar Foundation</a>
+          <a class="mt-1" href="https://ishraethane.co.in/" style="display:block;color:#787878;font-size:14px;">ISHRAE Thane Chapter</a>
+          <a class="mt-1" href="https://www.instagram.com/job4u_info/?hl=en" style="display:block;color:#787878;font-size:14px;">JOB4U</a>
+          <a class="mt-1" href="https://nhitm.ac.in/" style="display:block;color:#787878;font-size:14px;">New Horizon Institute of Technology & Management</a>
+          <a class="mt-1" href="https://www.linkedin.com/company/jvsh-technologies/" style="display:block;color:#787878;font-size:14px;">JVSH Technologies</a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 newfooteroverview">
+          <p style="display:block;color:#f6f6f6;font-weight:600;font-size:18px;">Overview</p>
+          <a class="mt-1" href="/index.php" style="display:block;color:#787878;font-size:14px;">Home</a>
+          <a class="mt-1" href="/index.php#companiespart"style="display:block;color:#787878;font-size:14px;">Companies</a>
+          <a class="mt-1" href="/student-register.php" style="display:block;color:#787878;font-size:14px;">Student Registration</a>
+          <a class="mt-1" href="/company-register.php" style="display:block;color:#787878;font-size:14px;">Company Registration</a>
+          <a class="mt-1" href="#" style="display:block;color:#787878;font-size:14px;">View your status</a>
         </div>
       </div>
-      <div class="social-links text-center text-md-end pt-3 pt-md-0">
-        <a href="https://www.facebook.com/profile.php?id=100081828978440&mibextid=ZbWKwL" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="https://instagram.com/ishrae_thane_chapter?igshid=MzRlODBiNWFlZA==" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/ishrae-thane-chapter/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      <div class="newfootersocials">
+        <p class="newfootersocialsheader">Siddharth Ovalekar Foundation | All rights reserved</p>
+        <div class="newfootersocialslogos">
+          <i onclick="window.location.href = 'https://www.facebook.com/SiddharthDilipOvalekar?mibextid=ZbWKwL';" class='bx bxl-facebook' style="cursor: pointer;margin-right: 0px!important;"></i>
+          <i onclick="window.location.href = 'https://www.siddharthovalekarfoundation.com/';" class='bx bx-globe' style="cursor: pointer;margin-left: 5px!important;"></i>
+        </div>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -271,7 +266,7 @@ if (isset($_POST["regname1"])) {
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?random=1923832139"></script>
 
 
 </html>

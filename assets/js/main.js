@@ -14,6 +14,10 @@
     }
   }
 
+  const glightbox = GLightbox({
+    selector: '.glightbox'
+  });
+
   /**
    * Easy event listener function
    */
@@ -156,7 +160,7 @@
    * Clients Slider
    */
   new Swiper('.clients-slider', {
-    speed: 250,
+    speed: 150,
     loop: true,
     autoplay: {
       delay: 5000,
@@ -247,7 +251,7 @@
    * Testimonials slider
    */
   new Swiper('.testimonials-slider', {
-    speed: 600,
+    speed: 300,
     loop: true,
     autoplay: {
       delay: 5000,
@@ -290,12 +294,7 @@
   new PureCounter();
 
 })()
-function progressBarScroll() {
-  let winScroll = document.body.scrollTop || document.documentElement.scrollTop,
-      height = document.documentElement.scrollHeight - document.documentElement.clientHeight,
-      scrolled = (winScroll / height) * 100;
-  document.getElementById("progressBar").style.width = scrolled + "%";
-}
+
 
 function showEngineering(element){
   var eligibilityList = document.getElementById("eligibilitylist");
@@ -312,6 +311,7 @@ function showEngineering(element){
         <li>Electrical Engineering</li>
         <li>Mechanical Engineering</li>
         <li>Civil Engineering</li>
+        <li>Chemical Engineering</li>
     `;
 
     // Trigger fade-in animation
@@ -333,6 +333,7 @@ function showNonengineering(element){
     <li>Pharma</li>
     <li>BSC Computer Science</li>
     <li>BSC Information Technology</li>
+    <li>LLB</li>
     `;
 
     // Trigger fade-in animation
@@ -349,7 +350,7 @@ function showHsc(element){
   // Set new content after a brief delay
   setTimeout(function() {
     eligibilityList.innerHTML = `
-    <li>Class 12th passouts (HSC)</li>
+    <li>12th (passed/pursuing)</li>
     `;
 
     // Trigger fade-in animation
@@ -357,7 +358,7 @@ function showHsc(element){
     eligibilityList.style.opacity = "1";
   }, 300); // Adjust the delay time (in milliseconds) as needed
 }
-
+ 
 function handleCategoryChange() {
   const selectElement = document.getElementById('regcategory');
   const selectedValue = selectElement.value;
@@ -365,12 +366,13 @@ function handleCategoryChange() {
   if (selectedValue=="Engineering"){
     fieldElement.innerHTML=`
     <option value="" disabled selected>Select an option</option>
-    <option value="Computer Science Engineering">Computer Science Engineering</option>
-    <option value="Information Technology Engineering">Information Technology Engineering</option>
-    <option value="Electronics and Telecommunications Engineering">Electronics and Telecommunications Engineering</option>
-    <option value="Electrical Engineering">Electrical Engineering</option>
-    <option value="Mechanical Engineering">Mechanical Engineering</option>
-    <option value="Civil Engineering">Civil Engineering</option>
+    <option value="Computer Science">Computer Science Engineering</option>
+    <option value="Information Technology">Information Technology Engineering</option>
+    <option value="Electronics and Telecommunications">Electronics and Telecommunications Engineering</option>
+    <option value="Electrical">Electrical Engineering</option>
+    <option value="Mechanical">Mechanical Engineering</option>
+    <option value="Civil">Civil Engineering</option>
+    <option value="Chemical">Chemical Engineering</option>
     `
   }
   if (selectedValue=="Non-Engineering/Diploma"){
@@ -381,15 +383,15 @@ function handleCategoryChange() {
     <option value="Pharma">Pharma</option>
     <option value="BSC Computer Science">BSC Computer Science</option>
     <option value="BSC Information Technology">BSC Information Technology</option>
+    <option value="BSC Information Technology">LLB</option>
     `
   }
-  if (selectedValue=="HSC (12th passed)"){
+  if (selectedValue=="12th HSC"){
     fieldElement.innerHTML=`
-    <option value="HSC (12th passed)" selected>HSC (12th passed)</option>
+    <option value="12th HSC" selected>HSC (12th passed/pursuing)</option>
     `
   }
 }
-
-window.onscroll = function () {
-  progressBarScroll();
-};
+$("#mmenu2toggle").on("click",function(){
+  $("#mmenu2container").toggle();
+})
